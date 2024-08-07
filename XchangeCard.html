@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xchange Card - Finxchange</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(89.7deg, #1e1e1e 0%, #2d2d2d 100%);
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            position: relative;
+        }
+        nav ul {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid #333333;
+            transition: background-color 0.3s ease;
+        }
+        nav ul.scrolled {
+            background-color: rgba(0, 0, 0, 1);
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #f2f2f2;
+            text-decoration: none;
+            padding: 14px 20px;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+        nav ul li a:hover {
+            background-color: #333333;
+            color: #ffffff;
+        }
+        .bg-img {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            object-fit: cover;
+            opacity: 0.7;
+            filter: brightness(50%);
+        }
+        .content {
+            position: relative;
+            z-index: 3;
+            padding-top: 80px;
+            padding-bottom: 60px;
+        }
+        .logo {
+            position: absolute;
+            top: 30px;
+            left: 20px;
+            height: 80px; /* Reduced height */
+            z-index: 1000;
+        }
+        .pricing-table {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        .pricing-table h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        .pricing-table p {
+            font-size: 1.1rem;
+            color: #ffffff;
+        }
+        .price {
+            font-size: 2rem;
+            margin: 20px 0;
+            color: #541faf; /* Accent color */
+        }
+        .pricing-table a.create-account-btn {
+            background: #541faf; /* Accent color */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+        .pricing-table a.create-account-btn:hover {
+            background: #6d1baf; /* Slightly lighter purple on hover */
+        }
+        .pricing-table a.continue-shopping-btn {
+            background: #333333; /* Dark color for contrast */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            margin-left: 10px; /* Space between buttons */
+        }
+        .pricing-table a.continue-shopping-btn:hover {
+            background: #555555; /* Slightly lighter dark color on hover */
+        }
+        .features {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .features ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .features li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            color: #ffffff;
+        }
+        .bag {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .bag .count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ff4d4d;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.9rem;
+            min-width: 20px;
+            text-align: center;
+            line-height: 1.2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="international-money-transfer.html">International Money Transfer</a></li>
+                <li><a href="currency-exchange.html">Currency Exchange</a></li>
+                <li><a href="fraud-detection.html">Fraud Detection</a></li>
+                <li><a href="digital-wallet.html">Digital Wallet</a></li>
+                <li><a href="index.html#pricing">Pricing</a></li>
+                <li><a href="contact-form.html">Contact Form</a></li>
+                <li>
+                    <a href="cart.html" class="bag">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
+                            <circle cx="6" cy="19" r="2"></circle>
+                            <circle cx="17" cy="19" r="2"></circle>
+                            <path d="M2 2h3.5l1 5h13l1-5H22"></path>
+                            <path d="M3.6 6h15.8l1.5 8H5.1l-1.5-8z"></path>
+                        </svg>
+                        <span class="count">0</span> <!-- Cart count -->
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <img src="/images/finxchange.jpg" alt="Finxchange Logo" class="logo">
+    </header>
+    <img src="/images/purplegradient.jpg" alt="Background Image" class="bg-img">
+    <main class="content">
+        <section class="pricing-table">
+            <h2>Xchange Card</h2>
+            <p>The Xchange Card offers a convenient and secure way to manage your remittance transactions with additional perks and benefits.</p>
+            <div class="price">$6/Month</div>
+            <div class="features">
+                <ul>
+                    <li>Feature 1: Seamless transactions with global acceptance</li>
+                    <li>Feature 2: Enhanced security features with fraud detection</li>
+                    <li>Feature 3: No foreign transaction fees</li>
+                    <li>Feature 4: Exclusive rewards and cashback offers</li>
+                </ul>
+            </div>
+            <a href="#" id="add-to-cart-xchange" class="create-account-btn">Add To Cart</a>
+          
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Finxchange. All rights reserved.</p>
+    </footer>
+    <script>
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav ul');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Function to update the cart count display
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+            // Ensure quantities are numbers
+            cart = cart.map(item => ({
+                ...item,
+                quantity: Number(item.quantity) || 0
+            }));
+
+            // Sum up all item quantities
+            let cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+
+            // Update the cart count in localStorage
+            localStorage.setItem('cartCount', cartCount);
+
+            // Update the cart count display
+            document.querySelector('.count').textContent = cartCount;
+        }
+
+        // Function to handle adding items to the cart
+        function addToCart(item) {
+            // Get the current cart from local storage
+            let cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+            // Check if the item already exists in the cart
+            const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
+            if (existingItemIndex >= 0) {
+                // If item exists, increase the quantity
+                cart[existingItemIndex].quantity = (cart[existingItemIndex].quantity || 0) + 1;
+            } else {
+                // Otherwise, add the new item to the cart
+                cart.push({ ...item, quantity: 1 });
+            }
+
+            // Save the updated cart back to local storage
+            localStorage.setItem('cartItems', JSON.stringify(cart));
+
+            // Update the cart count display
+            updateCartCount();
+        }
+
+        // Event listener for the Add To Cart button
+        document.getElementById('add-to-cart-xchange').addEventListener('click', function(event) {
+            event.preventDefault();
+            addToCart({
+                id: 'xchange-card',
+                name: 'Xchange Card',
+                price: 6,
+                image: '/images/xchange-card.jpg'
+            });
+            alert('Xchange Card has been added to your cart.');
+            window.location.href = 'cart.html'; // Redirect to cart page
+        });
+
+        // Initialize the cart count on page load
+        window.addEventListener('load', function() {
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>

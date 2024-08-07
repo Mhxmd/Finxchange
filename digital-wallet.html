@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finxchange Digital Wallet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(89.7deg, #1e1e1e 0%, #2d2d2d 100%);
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        h1, h2, h3 {
+            color: #ffffff;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        h1 {
+            font-size: 2.5rem;
+        }
+        h2, h3 {
+            margin-bottom: 15px;
+        }
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        nav ul {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 2;
+            border-bottom: 1px solid #333333;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #f2f2f2;
+            text-decoration: none;
+            padding: 14px 20px;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+        nav ul li a:hover {
+            background-color: #333333;
+            color: #ffffff;
+        }
+        .bg-img {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            object-fit: cover;
+            opacity: 0.7;
+            filter: brightness(50%);
+        }
+        .content {
+            position: relative;
+            z-index: 3;
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 12px;
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background: #1e1e1e;
+            color: #ffffff;
+            position: relative;
+            width: 100%;
+            border-top: 1px solid #333333;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        /* Card List Section */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .card {
+            perspective: 1000px;
+            cursor: pointer;
+            width: 250px;
+            height: 160px;
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        .card-inner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .card-front {
+            background-color: #333333;
+            color: #ffffff;
+        }
+        .card-back {
+            background-color: #444444;
+            color: #ffffff;
+            transform: rotateY(180deg);
+        }
+        .card img {
+            max-width: auto;
+            margin-bottom: auto;
+        }
+        .card h2 {
+            margin: 10px 0 5px;
+            font-size: 1rem;
+        }
+        .card p {
+            font-size: 1rem;
+        }
+
+        /* Transaction History Section */
+        .transaction-list {
+            margin-top: 20px;
+        }
+        .transaction-item {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            text-align: left;
+        }
+        .transaction-item h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #dcdcdc;
+        }
+        .transaction-item p {
+            margin: 5px 0;
+            font-size: 1rem;
+        }
+
+        /* Add New Card Form */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        form label {
+            font-size: 1rem;
+            color: #dcdcdc;
+            margin-bottom: 5px;
+        }
+        form input, form select {
+            padding: 10px;
+            width: 80%;
+            max-width: 400px;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background-color: #333333;
+            color: #ffffff;
+            font-size: 1rem;
+        }
+        form button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: #541faf;
+            color: #ffffff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        form button:hover {
+            background-color: #6714f7;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #333333;
+            color: #ffffff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+        }
+        .notification.show {
+            display: block;
+            animation: slide-in 0.5s ease;
+        }
+        .notification.hide {
+            display: none;
+        }
+        .notification button {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        @keyframes slide-in {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body ng-app="walletApp" ng-controller="walletController">
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="international-money-transfer.html">International Money Transfer</a></li>
+                <li><a href="currency-exchange.html">Currency Exchange</a></li>
+                <li><a href="fraud-detection.html">Fraud Detection</a></li>
+                <li><a href="digital-wallet.html">Digital Wallet</a></li>
+                <li><a href="index.html#pricing">Pricing</a></li>
+                <li><a href="contact-form.html">Contact Form</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <img src="/images/purplegradient.jpg" alt="Background Image" class="bg-img">
+
+    <main class="content">
+        <div class="container">
+            <h1>My Digital Wallet</h1>
+            <section>
+                <h2>My Cards</h2>
+                <div class="card-container">
+                    <div class="card" ng-repeat="card in cards" ng-click="changeCard($index)">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <img ng-src="/images/{{card.type | lowercase}}.jpg" alt="{{card.type}} Logo">
+                                <h2>{{card.type}}</h2>
+                                <p>{{card.number}}</p>
+                                <p>{{card.name}}</p>
+                                <p>{{card.expiry}}</p>
+                            </div>
+                            <div class="card-back">
+                                <h3>Transactions</h3>
+                                <ul>
+                                    <li ng-repeat="transaction in card.transactions">
+                                        {{transaction.date}} - {{transaction.merchant}} - {{transaction.amount}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Add New Card</h2>
+                <form ng-submit="addCard()">
+                    <label for="type">Card Type</label>
+                    <select id="type" ng-model="newCard.type" required>
+                        <option value="Visa">Visa</option>
+                        <option value="MasterCard">MasterCard</option>
+                        <option value="AmericanExpress">American Express</option>
+                        <option value="Discover">Discover</option>
+                    </select>
+                    <label for="number">Card Number</label>
+                    <input type="text" id="number" ng-model="newCard.number" placeholder="Card Number" required>
+                    <label for="name">Cardholder Name</label>
+                    <input type="text" id="name" ng-model="newCard.name" placeholder="Cardholder Name" required>
+                    <label for="expiry">Expiry Date</label>
+                    <input type="text" id="expiry" ng-model="newCard.expiry" placeholder="MM/YY" required>
+                    <button type="submit">Add Card</button>
+                </form>
+            </section>
+
+            <section>
+                <h2>Transaction History</h2>
+                <div class="transaction-list">
+                    <div class="transaction-item" ng-repeat="transaction in selectedCard.transactions">
+                        <h3>{{transaction.date}}</h3>
+                        <p>Merchant: {{transaction.merchant}}</p>
+                        <p>Amount: {{transaction.amount}}</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="notification" id="notification">
+        <button onclick="document.getElementById('notification').classList.remove('show')">x</button>
+        <p id="notificationMessage"></p>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Finxchange. All rights reserved.</p>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('walletApp', []);
+
+        app.controller('walletController', function ($scope) {
+            $scope.cards = [
+                {
+                    type: 'Visa',
+                    number: '**** **** **** 1234',
+                    name: 'John Doe',
+                    expiry: '12/24',
+                    transactions: [
+                        { date: '2024-07-20', merchant: 'Amazon', amount: '$50.00' },
+                        { date: '2024-07-18', merchant: 'Netflix', amount: '$12.99' },
+                        { date: '2024-07-15', merchant: 'Apple', amount: '$999.00' }
+                    ]
+                },
+                {
+                    type: 'MasterCard',
+                    number: '**** **** **** 5678',
+                    name: 'Jane Doe',
+                    expiry: '11/23',
+                    transactions: [
+                        { date: '2024-07-19', merchant: 'Spotify', amount: '$9.99' },
+                        { date: '2024-07-17', merchant: 'Walmart', amount: '$150.00' },
+                        { date: '2024-07-14', merchant: 'Uber', amount: '$30.00' }
+                    ]
+                }
+            ];
+
+            $scope.newCard = {
+                type: '',
+                number: '',
+                name: '',
+                expiry: ''
+            };
+
+            $scope.selectedCard = $scope.cards[0];
+
+            $scope.changeCard = function (index) {
+                $scope.selectedCard = $scope.cards[index];
+            };
+
+            $scope.addCard = function () {
+                if ($scope.newCard.type && $scope.newCard.number && $scope.newCard.name && $scope.newCard.expiry) {
+                    $scope.cards.push({
+                        type: $scope.newCard.type,
+                        number: '**** **** **** ' + $scope.newCard.number.slice(-4),
+                        name: $scope.newCard.name,
+                        expiry: $scope.newCard.expiry,
+                        transactions: []
+                    });
+
+                    $scope.newCard = {
+                        type: '',
+                        number: '',
+                        name: '',
+                        expiry: ''
+                    };
+
+                    showNotification('Card added successfully!');
+                }
+            };
+
+            function showNotification(message) {
+                var notification = document.getElementById('notification');
+                var notificationMessage = document.getElementById('notificationMessage');
+                notificationMessage.textContent = message;
+                notification.classList.add('show');
+                setTimeout(function () {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+i take inspirations from these
+
+
+do you think i should keep the green colour for the benefits or change it to purple ( I asked chatgpt for its opinion on the colour scheme)
+
+https://codepen.io/markrogers9109/pen/bRNNZB
+
+https://codepen.io/gayane-gasparyan/details/jOmaBQK
+
+https://codepen.io/quinlo/pen/YONMEa
+
+I used this site as a reference
+
+I added formspree, which i found and added it into my code so that it will send me an email regarding my purchase

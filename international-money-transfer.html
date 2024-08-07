@@ -157,7 +157,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const ctx = document.getElementById('exchangeRateChart').getContext('2d');
             let exchangeRateChart;
-
+// This is where i get the API
             function fetchExchangeRates() {
                 fetch('https://api.exchangerate-api.com/v4/latest/USD')
                     .then(response => response.json())

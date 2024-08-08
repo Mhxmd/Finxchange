@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout - Finxchange</title>
+    <title>Premium Plan - Finxchange</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -67,7 +67,14 @@
             padding-top: 80px;
             padding-bottom: 60px;
         }
-        .checkout-form {
+        .logo {
+            position: absolute;
+            top: 30px;
+            left: 20px;
+            height: 80px; /* Reduced height */
+            z-index: 1000;
+        }
+        .pricing-table {
             background: rgba(0, 0, 0, 0.8);
             padding: 40px 20px;
             text-align: center;
@@ -75,51 +82,47 @@
             margin: 20px auto;
             max-width: 800px;
         }
-        .checkout-form h2 {
+        .pricing-table h2 {
             font-size: 2rem;
             margin-bottom: 20px;
             color: #ffffff;
         }
-        .checkout-form p {
+        .pricing-table p {
             font-size: 1.1rem;
             color: #ffffff;
         }
-        .checkout-form label {
-            display: block;
-            margin-bottom: 10px;
-            font-size: 1rem;
-            color: #ffffff;
-            text-align: left;
+        .price {
+            font-size: 2rem;
+            margin: 20px 0;
+            color: #541faf; /* Accent color */
         }
-        .checkout-form input[type="text"],
-        .checkout-form input[type="email"],
-        .checkout-form input[type="tel"],
-        .checkout-form input[type="number"] {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 15px;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-        .checkout-form button {
+        .pricing-table a {
             background: #541faf; /* Accent color */
             color: white;
             border: none;
             border-radius: 4px;
-            padding: 15px 25px;
+            padding: 10px 20px;
             cursor: pointer;
             font-size: 1rem;
             transition: background-color 0.3s ease;
+            text-decoration: none;
         }
-        .checkout-form button:hover {
+        .pricing-table a:hover {
             background: #6d1baf; /* Slightly lighter purple on hover */
         }
-        footer {
-            text-align: center;
-            padding: 20px;
+        .features {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .features ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .features li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
             color: #ffffff;
-            background-color: rgba(0, 0, 0, 0.8);
         }
     </style>
 </head>
@@ -134,49 +137,25 @@
                 <li><a href="digital-wallet.html">Digital Wallet</a></li>
                 <li><a href="index.html#pricing">Pricing</a></li>
                 <li><a href="contact-form.html">Contact Form</a></li>
-                <li>
-                    <a href="cart.html" class="bag">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
-                            <circle cx="6" cy="19" r="2"></circle>
-                            <circle cx="17" cy="19" r="2"></circle>
-                            <path d="M2 2h3.5l1 5h13l1-5H22"></path>
-                            <path d="M3.6 6h15.8l1.5 8H5.1l-1.5-8z"></path>
-                        </svg>
-                        <span class="count">0</span> <!-- Cart count -->
-                    </a>
-                </li>
+                <li><a href="cart.html" id="cart-button">Cart (0)</a></li> <!-- Cart button -->
             </ul>
         </nav>
+        <img src="/images/finxchange.jpg" alt="Finxchange Logo" class="logo">
     </header>
     <img src="/images/purplegradient.jpg" alt="Background Image" class="bg-img">
     <main class="content">
-        <section class="checkout-form">
-            <h2>Checkout</h2>
-            <p>Please fill in your details to complete the purchase.</p>
-            <form>
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" required>
-
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" required>
-
-                <label for="address">Address</label>
-                <input type="text" id="address" name="address" required>
-
-                <label for="city">City</label>
-                <input type="text" id="city" name="city" required>
-
-                <label for="state">State</label>
-                <input type="text" id="state" name="state" required>
-
-                <label for="zip">ZIP Code</label>
-                <input type="number" id="zip" name="zip" required>
-
-                <button type="submit">Complete Purchase</button>
-            </form>
+        <section class="pricing-table">
+            <h2>Premium Plan</h2>
+            <p>Our Premium Plan offers an extensive set of features designed for users seeking advanced capabilities and additional benefits.</p>
+            <div class="price">$8/Year</div>
+            <div class="features">
+                <ul>
+                    <li>Feature 1: Unlimited transactions with the lowest fees</li>
+                    <li>Feature 4: Access to premium currency exchange rates</li>
+                    
+                </ul>
+            </div>
+            <a href="#" id="add-to-cart-premium" class="create-account-btn">Add To Cart</a>
         </section>
     </main>
     <footer>
@@ -192,12 +171,35 @@
             }
         });
 
-        // Update cart count on page load
-        window.addEventListener('load', function() {
-            // Example cart count, you should get this from localStorage or a server
-            let cartCount = JSON.parse(localStorage.getItem('cartCount')) || 0;
-            document.querySelector('.count').textContent = cartCount;
+        function addToCart(item) {
+            let cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+            cart.push(item);
+            localStorage.setItem('cartItems', JSON.stringify(cart));
+            updateCartCount(); // Update cart count in the navbar
+        }
+
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+            document.querySelector('#cart-button').textContent = `Cart (${cart.length})`;
+        }
+
+        document.getElementById('add-to-cart-premium').addEventListener('click', function(event) {
+            event.preventDefault();
+            addToCart({ 
+                id: 'premium-plan',
+                name: 'Premium Plan',
+                price: 12.99,
+                image: '/images/premium-plan.jpg'
+            });
+            alert('Premium Plan has been added to your cart.');
+            window.location.href = 'cart.html'; // Redirect to cart page
+        });
+
+        // Initialize cart count on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
         });
     </script>
 </body>
 </html>
+

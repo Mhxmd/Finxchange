@@ -41,3 +41,8 @@ app.post('/send-email', (req, res) => {
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
+
+//This is for the email section, using formspree
+//This script sets up an Express server that listens for POST requests at /send-email. When a request is received, 
+//it uses formspree to send an email with details provided in the request body. 
+//It handles errors and responds with success or failure messages based on the result of the email-sending operation.
